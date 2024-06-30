@@ -4,7 +4,7 @@ function PostCard({ $id, title, imageUrl }) {
     return (
         <Link to={`/posts/${$id}`}>
             <div className="w-full bg-gray-100 rounded-xl p-4 border-[1.5px] border-black">
-                <div className="w-full justify-center mb-4">
+                <div className="w-full h-40 justify-center mb-4">
                     <img
                         className="rounded-xl w-full"
                         src={postService.getFilePreview(imageUrl)}
