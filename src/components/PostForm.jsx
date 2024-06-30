@@ -95,7 +95,7 @@ function PostForm({ post, disabled = false }) {
                     }}
                 />
                 <RTE
-                    label="Editor:"
+                    label="content:"
                     control={control}
                     name="content"
                     defaultValue={getValues("content")}
@@ -105,7 +105,7 @@ function PostForm({ post, disabled = false }) {
             <div className="w-1/3 px-2">
                 <Input
                     className="mb-4"
-                    label="Featured image: "
+                    label="featured image: "
                     placeholder="featured image"
                     type="file"
                     accept="image/png, image/jpg ,image/jpeg,image/gif"
@@ -131,7 +131,7 @@ function PostForm({ post, disabled = false }) {
                 />
                 <Button
                     type="submit"
-                    label="Submit: "
+                    label="submit: "
                     className={`mt-10 p-2 w-full text-white ${
                         post ? "bg-green-500" : "bg-blue-500"
                     }`}
