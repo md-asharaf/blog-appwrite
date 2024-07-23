@@ -14,7 +14,7 @@ function Login() {
         setError("");
         try {
             const session = await authService.login(data);
-            setError(session)
+            setError(session);
             if (!session) {
                 const currentUserData = await authService.getCurrentUser();
                 if (currentUserData) dispatch(login(currentUserData));

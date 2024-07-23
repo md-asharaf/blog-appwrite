@@ -6,7 +6,7 @@ import { authService } from "../appwrite/index";
 function Header() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const authStatus = useSelector((state) => state.auth.status);
+    const { status: authStatus, userData } = useSelector((state) => state.auth);
     const onClickHandler = () => {
         authService.logout().then(() => {
             dispatch(logout());
@@ -43,6 +43,12 @@ function Header() {
                         <Logo width="50px" />
                     </Link>
                 </nav>
+                {userData?.name && (
+                    <p className="ml-20 text-lg">
+                        welcome,
+                        <span className="font-bold">{userData.name}</span>
+                    </p>
+                )}
                 <ul className="flex place-content-center gap-28">
                     {navItems.map((item) =>
                         item.active ? (

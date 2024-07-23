@@ -8,6 +8,7 @@ function Signup() {
     const { register, handleSubmit } = useForm();
     const [error, setError] = useState("");
     const onSubmitHandler = async (data) => {
+        console.log(data);
         try {
             const session = await authService.createAccount(data);
             setError(session);
@@ -40,11 +41,17 @@ function Signup() {
                         </Button>
                     </Link>
                 </p>
-                {error && (
-                    <p className="text-red-600 text-center">{error}</p>
-                )}
-                <form className='mt-8' onSubmit={handleSubmit(onSubmitHandler)}>
+                {error && <p className="text-red-600 text-center">{error}</p>}
+                <form className="mt-8" onSubmit={handleSubmit(onSubmitHandler)}>
                     <div className="space-y-5">
+                        <Input
+                            label="Name: "
+                            placeholder="enter your name"
+                            type="text"
+                            {...register("name", {
+                                required: true,
+                            })}
+                        />
                         <Input
                             label="Email: "
                             placeholder="enter your email"

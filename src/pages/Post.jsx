@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Button ,Container } from "../components/index";
+import { Button, Container } from "../components/index";
 import { postService } from "../appwrite/index";
 import parse from "html-react-parser";
 function Post() {
@@ -39,18 +39,23 @@ function Post() {
                     {author && (
                         <div className="absolute right-6 top-14">
                             <Link to={`/edit-post/${post.$id}`}>
-                                <Button  className="mr-4 py-2 px-10 bg-blue-700 text-white">
+                                <Button className="mr-4 py-2 px-10 bg-blue-700 text-white">
                                     Edit
                                 </Button>
                             </Link>
-                            <Button className="bg-white text-blue-700 border-gray-500 border-[1.5px] py-2 px-7" onClick={deletePost}>
+                            <Button
+                                className="bg-white text-blue-700 border-gray-500 border-[1.5px] py-2 px-7"
+                                onClick={deletePost}
+                            >
                                 Delete
                             </Button>
                         </div>
                     )}
                 </div>
                 <div className="w-full mb-6">
-                    <h1 className="text-2xl underline font-bold">{post.title} :</h1>
+                    <h1 className="text-2xl underline font-bold">
+                        {post.title} :
+                    </h1>
                 </div>
                 <div className="browser-css">{parse(post.content)}</div>
             </Container>
