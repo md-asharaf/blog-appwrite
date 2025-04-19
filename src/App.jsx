@@ -3,11 +3,13 @@ import { useDispatch } from "react-redux";
 import { Header, Footer } from "./components/index";
 import { login, logout } from "./store/index";
 import { authService } from "./appwrite/index";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
+
 
 function App() {
     const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
+    const navigate = useNavigate()
     useEffect(() => {
         authService
             .getCurrentUser()
@@ -16,6 +18,7 @@ function App() {
                     dispatch(login(currentUser));
                 } else {
                     dispatch(logout());
+                    navigate("/login");
                 }
             })
             .finally(() => setLoading(false));

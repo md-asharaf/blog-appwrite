@@ -10,6 +10,7 @@ function Header() {
     const onClickHandler = () => {
         authService.logout().then(() => {
             dispatch(logout());
+            navigate("/login");
         });
     };
     const navItems = [

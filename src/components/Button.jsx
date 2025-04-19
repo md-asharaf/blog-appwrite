@@ -4,6 +4,7 @@ function Button({
     className = "",
     type = "button",
     onClickHandler,
+    disabled = false,
     ...props
 }) {
     return (
@@ -11,7 +12,9 @@ function Button({
             type={type}
             value={children}
             onClick={onClickHandler}
-            className={` rounded-[50px] hover:scale-95 hover:opacity-90 ${className}`}
+            className={`rounded-[50px] ${
+                !disabled && "hover:scale-95 hover:opacity-90"
+            } ${className} ${disabled && "opacity-50 bg-gray-400"}`}
             {...props}
         />
     );

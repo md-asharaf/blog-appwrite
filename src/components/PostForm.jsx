@@ -7,16 +7,24 @@ import { useSelector } from "react-redux";
 function PostForm({ post, disabled = false }) {
     const navigate = useNavigate();
     const userData = useSelector((state) => state.auth.userData);
-    const { register, handleSubmit, setValue, getValues, control, watch } =
-        useForm({
-            defaultValues: {
-                title: post?.title || "",
-                status: post?.status || "active",
-                slug: post?.$id || "",
-                content: post?.content || "",
-            },
-        });
-
+    const {
+        register,
+        handleSubmit,
+        setValue,
+        getValues,
+        control,
+        watch,
+        formState: { isValid, isSubmitting, errors },
+    } = useForm({
+        mode: "onChange",
+        defaultValues: {
+            title: post?.title || "",
+            status: post?.status || "active",
+            slug: post?.$id || "",
+            content: post?.content || "",
+        },
+    });
+    console.log({ isValid, isSubmitting, errors });
     const onSubmitHandler = async (data) => {
         let dbpost = null;
         const imageFile = data.image[0]
@@ -37,7 +45,6 @@ function PostForm({ post, disabled = false }) {
                 userId: userData.$id,
             };
             dbpost = await postService.createPost(data.slug, data);
-            console.log(dbpost);
         }
         if (dbpost) navigate(`/posts/${dbpost.$id}`);
     };
@@ -116,7 +123,7 @@ function PostForm({ post, disabled = false }) {
                 {post && (
                     <div className="w-full mb-4">
                         <img
-                            src={postService.getFilePreview(post.imageUrl)}
+                            src={postService.getFileView(post.imageUrl)}
                             alt={post.title}
                         />
                     </div>
@@ -132,6 +139,7 @@ function PostForm({ post, disabled = false }) {
                 <Button
                     type="submit"
                     label="submit: "
+                    disabled={!isValid}
                     className={`mt-10 p-2 w-full text-white ${
                         post ? "bg-green-500" : "bg-blue-500"
                     }`}

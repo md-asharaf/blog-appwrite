@@ -7,7 +7,7 @@ function PostCard({ $id, title, imageUrl }) {
                 <div className="w-full h-40 justify-center mb-4">
                     <img
                         className="rounded-xl w-full"
-                        src={postService.getFilePreview(imageUrl)}
+                        src={postService.getFileView(imageUrl)}
                         alt={title}
                     />
                 </div>
