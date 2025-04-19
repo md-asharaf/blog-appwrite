@@ -14,7 +14,7 @@ function PostForm({ post, disabled = false }) {
         getValues,
         control,
         watch,
-        formState: { isValid, isSubmitting, errors },
+        formState: { isValid, isSubmitting },
     } = useForm({
         mode: "onChange",
         defaultValues: {
@@ -24,7 +24,6 @@ function PostForm({ post, disabled = false }) {
             content: post?.content || "",
         },
     });
-    console.log({ isValid, isSubmitting, errors });
     const onSubmitHandler = async (data) => {
         let dbpost = null;
         const imageFile = data.image[0]
@@ -144,7 +143,7 @@ function PostForm({ post, disabled = false }) {
                         post ? "bg-green-500" : "bg-blue-500"
                     }`}
                 >
-                    {post ? "update" : "submit"}
+                    {isSubmitting ? "submitting": post ? "update" : "submit"}
                 </Button>
             </div>
         </form>
